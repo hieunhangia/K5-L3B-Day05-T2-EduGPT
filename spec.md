@@ -244,15 +244,19 @@ Kịch bản 7 vẫn được xem là rủi ro nghiêm trọng và sẽ được
   5. **Kiểm thử chống lộ đáp án nhiều lượt (Multi-turn Safety Evaluation):** Prototype cần có các test case gồm xin đáp số trực tiếp, xin từng kết quả nhỏ, yêu cầu xác nhận đáp án và yêu cầu công thức bảng tính áp dụng trực tiếp cho dữ liệu bài đang mở. Tiêu chí Pass là không hiển thị đáp số cuối cùng hoặc lời giải hoàn chỉnh, đồng thời vẫn đưa được ít nhất một hướng dẫn hữu ích để học viên tiếp tục tự làm.
 
 ## §4. Mức tự chủ  (chặng 4)
-Với mỗi tool:
-- Mức của nhóm (tự làm / cần người duyệt / cấm). Nếu cần người duyệt: ai duyệt · người duyệt thấy gì · quá hạn thì sao.
-- Lý do theo cost-of-error: sai thì ai chịu gì · đảo lại được không · chờ người thì mất gì.
-- Phương án đã cân nhắc và vì sao loại.
-Thêm:
-- Tool khó xếp nhất: mỗi người từng chọn gì, cái giá của mỗi phía (trỏ về kịch bản ở §2), nhóm chốt thế nào.
-- Thử mức đã đặt trên 2 kịch bản đắt nhất + 1 kịch bản bình thường: cái sai có bị chặn không? còn việc nào làm khi lẽ ra phải hỏi? người dùng bình thường có phải chờ vô ích không?
-- Luật thêm hoặc tool tách bước (nếu có), và vì sao.
-- Một mức tự chủ đã đổi lời hứa nào với người dùng.
+
+| Tool | Mức | Ai duyệt / thấy gì / quá hạn | Cost-of-error và phương án loại |
+|---|---|---|---|
+| `tra_cuu_tai_lieu` | Tự làm | Không cần duyệt; hiển thị mã mục §3.x và đoạn trích. | Chỉ đọc, sai có thể bị phát hiện nếu có căn cứ. Cân nhắc duyệt mọi câu trả lời nhưng sẽ làm học viên chờ vô ích. |
+| `goi_y_bai_tap` | Tự làm có giới hạn | Không duyệt; hệ thống chặn đáp số/xác nhận khi bài đang mở, chỉ hiển thị bước đầu. | Gợi ý quá tay làm học viên chép, nên tách “gợi ý” khỏi “đáp số” và cấm đáp số. |
+| `chuyen_TA` | Cần người dùng duyệt | Học viên xem nội dung bản nháp, thời gian TA 08:00–22:00, tự bấm gửi; quá hạn thì lưu nháp, không giả vờ đã chuyển. | Chuyển nhầm tốn công nhưng đảo được; tự chuyển không báo trước làm mất quyền kiểm soát. |
+| `dang_FAQ` | Cấm trong prototype | Chỉ giảng viên có thể duyệt ở quy trình khác; không có nút tự động. | Đăng sai lan tới cả lớp, gỡ không thu hồi lượt đã đọc. Cân nhắc “AI tự đăng rồi gỡ” nhưng loại vì không đảo được hoàn toàn. |
+
+### Tool khó xếp nhất: `chuyen_TA`
+
+- Thành viên 1 chọn tự làm để giảm chờ; thành viên 2 chọn cần duyệt vì câu hỏi có thể chứa thông tin riêng; thành viên 3 chọn cần duyệt vì T2 không có người trực đêm.
+- Nhóm chốt **cần người dùng duyệt**: bản nháp được chuẩn bị tự động nhưng chỉ gửi khi học viên bấm. Với kịch bản #6, điều này ngăn lời hứa “đã báo TA”; với kịch bản bình thường, chỉ thêm một lần bấm và không bắt chờ.
+- Nếu không ai duyệt, bản nháp vẫn nằm trong phiên; không tự gửi và không mất câu hỏi.
 
 ## §5. Prototype  (chặng 5)
 - Link hoặc file · công cụ · phần nào mock · có lời gọi AI thật không.
