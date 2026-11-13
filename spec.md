@@ -1,6 +1,6 @@
-# Bài nộp LAB5 — T3 · Nhóm EduGPT
+# Bài nộp LAB5 — T2 · Nhóm EduGPT
 
-**Lớp:** L3B · **Bàn / zone:** ____ · **Track:** T3
+**Lớp:** L3B · **Bàn / zone:** ____ · **Track:** T2 (Giáo dục)
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
@@ -9,7 +9,12 @@
 | Lê Thị Ly | 2A202603989 | |
 
 ## §1. Lát cắt & phạm vi
-- Lát cắt (chép từ track).
+- **Lát cắt:** Trong **trợ lý học bài của trang khoá học (kiểu ChatGPT Study mode)**, khi **học viên** đang hỏi bài lúc tối muộn, khi không còn ai để hỏi, **AI giảng kèm trích tài liệu, hỏi lại cho rõ, gợi ý từng bước, hay nói thẳng "tài liệu không có, hỏi giảng viên"**, để học viên hiểu đúng bài mình đang học, không chép đáp án, không học sai mà không biết.
+
+| Sản phẩm | Một người dùng | Một việc | Một quyết định của AI | Một kết quả |
+|---|---|---|---|---|
+| Trợ lý học bài của trang khoá học | học viên | hỏi bài lúc tối muộn, khi không còn ai để hỏi | giảng kèm trích tài liệu, hỏi lại cho rõ, gợi ý từng bước, hay nói thẳng "tài liệu không có, hỏi giảng viên" | học viên hiểu đúng bài mình đang học, không chép đáp án, không học sai mà không biết |
+
 - 3 việc tính năng KHÔNG làm, mỗi việc một câu vì sao.
 
 ## §2. Kịch bản rủi ro  (chặng 2)
