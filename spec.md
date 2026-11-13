@@ -254,7 +254,7 @@ Kịch bản 7 vẫn được xem là rủi ro nghiêm trọng và sẽ được
 
 ### Tool khó xếp nhất: `chuyen_TA`
 
-- Thành viên 1 chọn tự làm để giảm chờ; thành viên 2 chọn cần duyệt vì câu hỏi có thể chứa thông tin riêng; thành viên 3 chọn cần duyệt vì T2 không có người trực đêm.
+- Thành viên 1 (Huy Hiệu) chọn tự làm để giảm chờ; thành viên 2 (Việt Anh) chọn cần duyệt vì câu hỏi có thể chứa thông tin riêng; thành viên 3 (Ly) chọn cần duyệt vì T2 không có người trực đêm.
 - Nhóm chốt **cần người dùng duyệt**: bản nháp được chuẩn bị tự động nhưng chỉ gửi khi học viên bấm. Với kịch bản #6, điều này ngăn lời hứa “đã báo TA”; với kịch bản bình thường, chỉ thêm một lần bấm và không bắt chờ.
 - Nếu không ai duyệt, bản nháp vẫn nằm trong phiên; không tự gửi và không mất câu hỏi.
 
