@@ -254,9 +254,14 @@ Kịch bản 7 vẫn được xem là rủi ro nghiêm trọng và sẽ được
 
 ### Tool khó xếp nhất: `chuyen_TA`
 
-- Thành viên 1 (Huy Hiệu) chọn tự làm để giảm chờ; thành viên 2 (Việt Anh) chọn cần duyệt vì câu hỏi có thể chứa thông tin riêng; thành viên 3 (Ly) chọn cần duyệt vì T2 không có người trực đêm.
-- Nhóm chốt **cần người dùng duyệt**: bản nháp được chuẩn bị tự động nhưng chỉ gửi khi học viên bấm. Với kịch bản #6, điều này ngăn lời hứa “đã báo TA”; với kịch bản bình thường, chỉ thêm một lần bấm và không bắt chờ.
-- Nếu không ai duyệt, bản nháp vẫn nằm trong phiên; không tự gửi và không mất câu hỏi.
+- **Quan điểm của từng thành viên và cái giá phải trả:**
+  - **Thành viên 1 — Tự làm:** AI tự động chuyển câu hỏi đến TA để học viên không phải thao tác thêm và tránh quên gửi. Tuy nhiên, cách này có nguy cơ chia sẻ nội dung hội thoại khi học viên chưa đồng ý, tạo yêu cầu không cần thiết và gây quá tải cho TA.
+  - **Thành viên 2 — Cần người dùng duyệt:** Học viên được xem trước nội dung và quyết định có gửi hay không, giúp bảo vệ thông tin cá nhân. Đổi lại, học viên phải thực hiện thêm một thao tác xác nhận và có thể quên gửi.
+  - **Thành viên 3 — Cần người dùng duyệt:** Vì TA chỉ trực từ 08:00–22:00, việc tự động chuyển câu hỏi lúc đêm muộn không giúp học viên nhận phản hồi ngay. Cách duyệt trước tránh tạo yêu cầu ngoài ý muốn, nhưng học viên vẫn phải chờ TA xử lý sau khi gửi.
+
+- **Quyết định cuối cùng của nhóm:** Nhóm thống nhất chọn **cần người dùng duyệt**. AI được tự động chuẩn bị bản nháp gồm câu hỏi, nội dung liên quan và nguồn tài liệu, nhưng chỉ gọi `chuyen_TA` khi học viên bấm xác nhận. Với **kịch bản #1**, quyết định này giúp học viên chủ động chuyển mâu thuẫn trong §3.3 cho TA xác minh mà không bị AI tự ý báo cáo. Với **kịch bản #6**, AI không tự chuyển yêu cầu xin đáp số hoặc tuyên bố "đã báo TA". Đối với câu hỏi thông thường, AI vẫn hỗ trợ ngay, không bắt học viên chờ duyệt; thao tác xác nhận chỉ xuất hiện khi thực sự cần chuyển TA.
+
+- **Trường hợp không có người duyệt hoặc quá hạn:** Nếu học viên không bấm xác nhận, bản nháp được giữ trong phiên làm việc và **không tự động gửi**. Nếu học viên xác nhận ngoài giờ trực 08:00–22:00, hệ thống thực hiện gửi yêu cầu và hiển thị trạng thái theo kết quả thực tế của `chuyen_TA`; TA có thể xử lý vào ca trực tiếp theo. Nếu gửi thất bại, AI thông báo rõ "Chưa gửi được" và cho phép thử lại. Hệ thống không tự tuyên bố TA đã nhận hoặc hứa hẹn thời điểm phản hồi khi chưa có căn cứ.
 
 ## §5. Prototype  (chặng 5)
 - Link hoặc file · công cụ · phần nào mock · có lời gọi AI thật không.
