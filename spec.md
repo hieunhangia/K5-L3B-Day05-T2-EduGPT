@@ -133,7 +133,115 @@ Kịch bản 7 vẫn được xem là rủi ro nghiêm trọng và sẽ được
 ---
 
 ### 2. Kịch bản 6 — AI tiết lộ đáp án Bài tập 3 đang mở
-*(Chờ bổ sung)*
+#### a. Trải nghiệm cụ thể khi học viên yêu cầu đáp số
+
+- **AI nói gì (nguyên văn):**
+
+  > *"Mình hiểu bạn đang muốn hoàn thành Bài tập 3 trước hạn nộp lúc 23:59 ngày 13/11/2026.*
+  >
+  > *Tuy nhiên, Bài tập 3 hiện vẫn đang mở. Mình có thể hướng dẫn bạn cách giải, nhưng không thể cung cấp hoặc xác nhận đáp số cuối cùng để bạn sao chép nộp bài.*
+  >
+  > *Theo mục **§3.1 và §3.2 Tài liệu Buổi 3**, để tính trung bình cộng, bạn lấy tổng các giá trị chia cho số phần tử; để tính trung vị, bạn sắp xếp các giá trị tăng dần rồi xác định giá trị ở giữa.*
+  >
+  > *Mình đề xuất bắt đầu với trung vị: Vì bài có 8 giá trị, bạn hãy thử xác định hai vị trí chính giữa sau khi sắp xếp. Bạn đã làm đến bước nào rồi? Mình sẽ gợi ý tiếp dựa trên phần bạn đã thực hiện."*
+
+- **Người dùng thấy gì trên màn hình (UI):**
+  - **Hộp thông báo giới hạn học tập (Learning Boundary Box — nền xanh nhạt):** Xuất hiện phía trên câu trả lời với tiêu đề `[Bài tập đang mở — Chế độ hướng dẫn từng bước]`, giúp học viên hiểu AI đang hỗ trợ học tập chứ không thực hiện bài thay.
+  - **Khối thông tin bài tập (Assignment Context Card):**
+    - *Tên bài:* Bài tập 3 — Thống kê mô tả.
+    - *Nguồn:* §3.5 Tài liệu Buổi 3.
+    - *Hạn nộp:* 23:59 ngày 13/11/2026.
+    - *Trạng thái:* `[Đang mở]` nếu được xác nhận từ dữ liệu khóa học tại thời điểm tương tác.
+    - *Quyền hỗ trợ:* `[Chỉ gợi ý — Không cung cấp đáp số]`.
+  - **Khối hướng dẫn từng bước (Step-by-step Learning Panel):**
+    - *Bước 1:* Xác định yêu cầu của bài toán: trung bình cộng và trung vị.
+    - *Bước 2:* Nhắc lại phương pháp tính từ §3.1 và §3.2.
+    - *Bước 3:* Đặt câu hỏi gợi mở: *"Với 8 giá trị, hai vị trí chính giữa là vị trí nào?"*
+    - Không hiển thị kết quả cuối cùng, phép tính hoàn chỉnh hoặc đáp án có thể sao chép.
+  - **Huy hiệu giới hạn vai trò (Authority Badge):** Nhãn `[AI hỗ trợ học tập — Không chấm hoặc xác nhận bài nộp]`.
+  - **Cụm nút hành động (Action Buttons):**
+    - Nút chính: `[Gợi ý bước tiếp theo]`.
+    - Nút phụ: `[Xem lại lý thuyết §3.1–§3.2]`.
+    - Nút bổ sung: `[Kiểm tra cách làm của tôi]`, chỉ phản hồi về phương pháp và lỗi lập luận, không xác nhận đáp số cuối cùng.
+    - Đường hỗ trợ: `[Hỏi TA nếu vẫn chưa hiểu]`.
+
+- **Người dùng làm gì tiếp:**
+  - Học viên có thể chọn `[Gợi ý bước tiếp theo]` để nhận một gợi ý nhỏ, thay vì lời giải hoàn chỉnh.
+  - Nếu chưa nắm lý thuyết, học viên chọn `[Xem lại lý thuyết §3.1–§3.2]` để xem giải thích bằng ví dụ khác với dữ liệu Bài tập 3.
+  - Nếu đã tự làm, học viên chọn `[Kiểm tra cách làm của tôi]` và gửi các bước tính. AI chỉ ra bước lập luận cần xem lại nhưng không tiết lộ hoặc xác nhận đáp số cuối cùng.
+  - Nếu học viên tiếp tục yêu cầu đáp án, hệ thống vẫn giữ chế độ hướng dẫn, không mở khóa lời giải vì người dùng nhắc lại yêu cầu.
+  - Nếu học viên không bấm gì, cuộc trò chuyện vẫn tiếp diễn bình thường; AI không tự gửi thông báo cho TA hoặc đánh dấu học viên có hành vi gian lận.
+
+- **Ai được báo, sau bao lâu, thấy gì:**
+  - **Ai được báo:** Mặc định không ai được báo. Việc học viên xin đáp số chưa đủ căn cứ để kết luận có hành vi gian lận hoặc cần báo cáo cho giảng viên.
+  - **Sau bao lâu:** Nếu học viên chủ động chọn `[Hỏi TA nếu vẫn chưa hiểu]`, hệ thống hiển thị bản xem trước nội dung cần gửi và yêu cầu xác nhận. Sau khi xác nhận, `chuyen_TA` được gọi ngay; chỉ khi tool trả về thành công, hệ thống mới thông báo đã gửi. Do TA làm việc từ 08:00–22:00, yêu cầu ngoài giờ có thể chờ đến ca trực tiếp theo, không cam kết thời điểm phản hồi cụ thể.
+  - **Người đó thấy gì:** TA nhận câu hỏi học tập, mục kiến thức học viên đang vướng, các bước học viên đã thử và thời điểm gửi. Nội dung chỉ bao gồm thông tin cần thiết cho việc hỗ trợ, không tự động gắn nhãn học viên gian lận.
+  - **Nếu gửi thất bại:** Giao diện hiển thị `[Chưa chuyển được câu hỏi — Thử lại]`, không tuyên bố rằng TA đã nhận được yêu cầu.
+
+#### b. Lập luận quyết định (chọn cách nào, đã loại cách nào, vì sao)
+
+- **Các phương án đã cân nhắc:**
+  1. *Phương án A — Trả lời trực tiếp (Full Answer):* Gọi `goi_y_bai_tap`, tính toàn bộ Bài tập 3 và đưa đáp số để học viên nộp.
+  2. *Phương án B — Dừng hoàn toàn và chuyển người (Hard Stop & Escalate):* Từ chối mọi hỗ trợ liên quan đến Bài tập 3, yêu cầu học viên chờ TA hoặc giảng viên.
+  3. *Phương án C — Chỉ hỏi lại (Clarification Loop):* Hỏi học viên muốn đáp số của câu nào hoặc đã tính đến đâu, nhưng chưa nêu giới hạn hỗ trợ.
+  4. *Phương án D — Trả lời kèm giới hạn và gợi ý từng bước (Scoped Tutoring with Progressive Hints).*
+
+- **Chọn phương án:** **Phương án D — Trả lời kèm giới hạn và gợi ý từng bước.**
+
+- **Vì sao chọn Phương án D:**
+  - Lát cắt của sản phẩm là **trợ lý học bài vào tối muộn khi không còn ai để hỏi**. Nếu chỉ từ chối, học viên không nhận được hỗ trợ đúng lúc đang gặp khó khăn.
+  - Mục tiêu của trợ lý không phải tối đa hóa số câu trả lời, mà là giúp học viên tự hiểu và giải quyết bài tập. Vì vậy, AI cần chuyển yêu cầu *"cho em đáp số"* thành một hoạt động học tập có hướng dẫn.
+  - `goi_y_bai_tap` có thể được sử dụng an toàn nếu hệ thống giới hạn mức gợi ý và kiểm tra đầu ra trước khi hiển thị.
+  - Học viên vẫn giữ quyền chủ động: lựa chọn xem lại lý thuyết, nhận gợi ý hoặc gửi cách làm để được phản hồi.
+  - Việc không tự báo TA giúp tránh biến một yêu cầu học tập thông thường thành hành vi bị giám sát hoặc quy kết gian lận.
+
+- **Vì sao loại các phương án kia:**
+  - *Loại Phương án A:* Đưa đáp số có thể làm mất ý nghĩa đánh giá của bài tập đang mở. Khi kết quả đã hiển thị, không thể thu hồi thông tin học viên đã đọc hoặc sao chép.
+  - *Loại Phương án B:* Từ chối toàn bộ sẽ tạo ngõ cụt lúc đêm muộn, trong khi AI vẫn có khả năng giải thích lý thuyết và gợi ý phương pháp mà không làm hộ.
+  - *Loại Phương án C:* Ý định xin đáp số đã rõ. Nếu chỉ hỏi lại mà không nêu giới hạn, học viên có thể hiểu rằng AI sẽ cung cấp đáp án khi được bổ sung thông tin, dẫn đến kỳ vọng sai và những vòng hỏi đáp không cần thiết.
+
+#### c. Loại lỗi và vì sao cách nói, cách sửa đi theo loại đó
+
+- **Loại lỗi:** **Lỗi ngữ cảnh (Context Error / Academic Integrity Boundary)** kết hợp với nguy cơ hệ thống vượt phạm vi hỗ trợ (System Over-compliance).
+
+- **Vì sao cách nói và cách sửa đi theo loại đó:**
+  - *Bản chất:* Học viên đưa ra yêu cầu rõ ràng, nhưng yêu cầu này xuất hiện trong ngữ cảnh Bài tập 3 đang mở và được dùng để đánh giá quá trình học. Nếu AI chỉ làm theo câu lệnh của người dùng mà không xét trạng thái bài tập, hệ thống sẽ chuyển từ vai trò trợ giảng sang làm bài thay.
+  - *Không coi đây đơn thuần là lỗi người dùng:* Học viên có thể đang lo lắng vì sắp đến hạn nộp, chưa hiểu bài hoặc chưa biết trợ lý được phép hỗ trợ đến đâu. Một yêu cầu xin đáp số không tự động chứng minh ý định gian lận.
+  - *Cách nói:* AI cần thừa nhận nhu cầu hoàn thành bài đúng hạn, giải thích ngắn gọn giới hạn và ngay lập tức cung cấp một lựa chọn học tập hữu ích. Tránh các câu mang tính phán xét như *"Bạn đang gian lận"* hoặc *"Bạn phải tự làm, tôi không giúp"*.
+  - *Cách sửa:* Không chỉ yêu cầu AI lịch sự hơn, mà phải bổ sung cơ chế nhận diện bài tập đang mở, giới hạn hành vi của `goi_y_bai_tap` và kiểm tra đầu ra để ngăn lộ đáp án.
+
+#### d. Nguyên tắc HAX/PAIR áp dụng
+
+1. **HAX G10 — Scope services when in doubt & PAIR — Appropriate Trust (Giới hạn khả năng và xây dựng niềm tin phù hợp):**
+   - *Vị trí trỏ vào:* Hộp `[Bài tập đang mở — Chế độ hướng dẫn từng bước]` và câu *"Mình có thể hướng dẫn bạn cách giải, nhưng không thể cung cấp hoặc xác nhận đáp số cuối cùng..."*.
+   - *Ý nghĩa:* AI công khai phạm vi hỗ trợ, không tạo kỳ vọng rằng hệ thống có thể làm bài hoặc chấm bài thay giảng viên.
+
+2. **HAX G11 — Make clear why the system did what it did & PAIR — Explainability (Giải thích quyết định):**
+   - *Vị trí trỏ vào:* Thẻ `Assignment Context Card`, thể hiện tên Bài tập 3, trạng thái đang mở, hạn nộp và nhãn `[Chỉ gợi ý — Không cung cấp đáp số]`.
+   - *Ý nghĩa:* Học viên hiểu lý do AI không đưa đáp số là do trạng thái bài tập và mục tiêu hỗ trợ học tập, không phải vì AI không biết cách giải hoặc cố tình gây khó khăn.
+
+3. **HAX G16 — Convey the consequences of user actions & PAIR — Human Agency (Quyền chủ động của người dùng):**
+   - *Vị trí trỏ vào:* Các nút `[Gợi ý bước tiếp theo]`, `[Xem lại lý thuyết §3.1–§3.2]`, `[Kiểm tra cách làm của tôi]` và `[Hỏi TA nếu vẫn chưa hiểu]`.
+   - *Ý nghĩa:* Mỗi lựa chọn có kết quả rõ ràng: nhận thêm một gợi ý, xem lý thuyết, nhận phản hồi về phương pháp hoặc yêu cầu hỗ trợ từ TA. Học viên tự quyết định bước tiếp theo mà không bị AI ép chuyển người hoặc tự động báo cáo.
+
+#### e. Lỗi sửa câu chữ KHÔNG cứu được và thiết kế giải cứu
+
+- **Lỗi sửa câu chữ không cứu được:**
+  - Dù câu trả lời ban đầu có ghi *"Mình không thể cung cấp đáp án"*, nếu tool `goi_y_bai_tap` vẫn trả về đáp số, các bước tính đầy đủ hoặc lời giải có thể ghép lại thành đáp án, hệ thống vẫn có nguy cơ làm lộ bài.
+  - Học viên có thể thay đổi cách hỏi qua nhiều lượt, ví dụ: *"Chỉ tính trung bình thôi"*, *"Cho em kiểm tra trung vị"*, *"Em ra kết quả này đúng không?"* hoặc *"Viết công thức Excel áp dụng cho 8 số này"*. Nếu hệ thống chỉ kiểm tra từng tin nhắn riêng lẻ, đáp án có thể bị tiết lộ dần.
+  - Nếu AI đã hiển thị đáp số, việc xin lỗi hoặc xóa tin nhắn sau đó không thể đảm bảo học viên chưa đọc, ghi lại hoặc sao chép.
+
+- **Thiết kế cứu nó (System & UI Design):**
+
+  1. **Bộ kiểm tra ngữ cảnh bài tập (Assignment Context Gate):** Trước khi gọi `goi_y_bai_tap`, hệ thống đối chiếu ID bài tập và trạng thái từ dữ liệu khóa học. Nếu bài đang mở, hệ thống bật chế độ `HINT_ONLY`, không cho phép yêu cầu đáp số hoặc lời giải hoàn chỉnh. Nếu trạng thái không xác minh được, hệ thống mặc định hỗ trợ ở mức gợi ý thay vì tự giả định bài đã đóng.
+
+  2. **Giới hạn gợi ý theo tiến độ (Progressive Hint Guardrail):** Mỗi lượt chỉ cung cấp một gợi ý vừa đủ, dựa trên bước học viên đã thực hiện. Hệ thống theo dõi ngữ cảnh nhiều lượt để hạn chế việc chia nhỏ yêu cầu nhằm ghép thành lời giải hoàn chỉnh. Các ví dụ minh họa phải sử dụng dữ liệu khác với Bài tập 3.
+
+  3. **Bộ kiểm tra đầu ra trước khi hiển thị (Answer Leakage Check):** Phản hồi từ `goi_y_bai_tap` phải qua bước kiểm tra xem có chứa đáp số, phép tính hoàn chỉnh hoặc xác nhận kết quả cuối cùng của Bài tập 3 hay không. Nếu phát hiện nội dung vượt giới hạn, hệ thống chặn phản hồi và thay bằng gợi ý an toàn. Đây là rào chắn bổ sung, không được coi là bảo đảm phát hiện mọi hình thức lộ đáp án.
+
+  4. **Phân quyền hành động (Autonomy Guardrail):** AI được tự động tra cứu §3.1–§3.5 và đưa gợi ý trong giới hạn; không có quyền chấm hoặc xác nhận bài nộp. Việc chuyển câu hỏi cho TA chỉ thực hiện sau khi học viên đồng ý và phải có xác nhận thành công từ `chuyen_TA`.
+
+  5. **Kiểm thử chống lộ đáp án nhiều lượt (Multi-turn Safety Evaluation):** Prototype cần có các test case gồm xin đáp số trực tiếp, xin từng kết quả nhỏ, yêu cầu xác nhận đáp án và yêu cầu công thức bảng tính áp dụng trực tiếp cho dữ liệu bài đang mở. Tiêu chí Pass là không hiển thị đáp số cuối cùng hoặc lời giải hoàn chỉnh, đồng thời vẫn đưa được ít nhất một hướng dẫn hữu ích để học viên tiếp tục tự làm.
 
 ## §4. Mức tự chủ  (chặng 4)
 Với mỗi tool:
