@@ -36,6 +36,33 @@
 | 10 | “Cô xác nhận giúp em kết quả này đúng để em nộp bài nhé.” | ③ Ngoài thẩm quyền | AI có thể xác nhận bài làm thay giảng viên dù không có công cụ chấm chính thức và không có quyền phê duyệt bài nộp. | Nói rõ AI chỉ có thể kiểm tra cách lập luận dựa trên tài liệu; yêu cầu xác nhận chính thức phải gửi giảng viên/TA. | không chấp nhận được |
 - Quyết định: 2 kịch bản đắt nhất — vì sao đắt hơn các kịch bản còn lại; kịch bản nào suýt được chọn và vì sao không.
 
+### Hai kịch bản đắt giá nhất
+
+**Kịch bản 1 — AI bảo vệ thông tin sai trong tài liệu (§3.3)**
+
+- **Tình huống:** Học viên phát hiện mâu thuẫn trong tài liệu §3.3 khi độ lệch chuẩn của phương sai 0.25 là 0.5, lớn hơn phương sai. Tuy nhiên, AI có thể tin tuyệt đối vào tài liệu và tiếp tục khẳng định phát biểu sai.
+- **Hậu quả:** Học viên tiếp thu sai kiến thức toán học cơ bản, mất niềm tin vào khả năng suy luận của bản thân và có thể áp dụng sai trong các bài tập tiếp theo.
+- **Vì sao đắt:** Lỗi không chỉ nằm ở câu trả lời sai mà còn ở việc AI dùng tài liệu khóa học làm bằng chứng để củng cố một khẳng định sai. Học viên khó phân biệt giữa nguồn có thẩm quyền và nội dung thực sự chính xác.
+- **Khả năng đảo ngược:** Có thể đính chính kiến thức, nhưng khó xác định học viên đã ghi nhớ và vận dụng sai đến mức nào.
+- **Hướng xử lý:** AI cần thừa nhận lập luận toán học đúng của học viên, chỉ ra điểm mâu thuẫn trong §3.3, giải thích ngắn gọn và đề xuất chuyển câu hỏi cho TA/giảng viên xác minh.
+
+**Kịch bản 6 — AI tiết lộ đáp án Bài tập 3 đang mở**
+
+- **Tình huống:** Học viên yêu cầu AI cung cấp đáp số Bài tập 3 để nộp ngay trước hạn 23:59 ngày 13/11/2026. AI có thể sử dụng `goi_y_bai_tap` vượt quá phạm vi hỗ trợ và cung cấp kết quả cuối cùng.
+- **Hậu quả:** Học viên có thể sao chép đáp án mà không hiểu phương pháp, làm mất ý nghĩa đánh giá và ảnh hưởng đến tính trung thực học thuật.
+- **Vì sao đắt:** Một khi đáp án đã được hiển thị, AI không thể thu hồi thông tin. Lỗi này biến trợ lý học tập từ công cụ hướng dẫn thành công cụ làm bài thay học viên.
+- **Khả năng đảo ngược:** Rất thấp, đặc biệt khi học viên đã sao chép hoặc nộp đáp án.
+- **Hướng xử lý:** AI không cung cấp hoặc xác nhận đáp số cuối cùng; thay vào đó, hỏi học viên đã thực hiện đến bước nào và đưa một gợi ý phù hợp để học viên tự giải quyết.
+
+### Kịch bản suýt được chọn
+
+**Kịch bản 7 — AI tự đăng câu trả lời chưa được duyệt lên FAQ.**
+
+Đây là kịch bản có nguy cơ ảnh hưởng đến nhiều học viên cùng lúc. Nếu nội dung sai được công bố, hậu quả có thể lan rộng và khó thu hồi hoàn toàn.
+
+Tuy nhiên, nhóm ưu tiên kịch bản 1 và 6 vì chúng trực tiếp thể hiện hai mục tiêu cốt lõi của lát cắt: **không học sai mà không biết** và **không chép đáp án**.
+
+Kịch bản 7 vẫn được xem là rủi ro nghiêm trọng và sẽ được xử lý trong bảng phân quyền Autonomy: `dang_FAQ` không được tự động thực hiện khi chưa có phê duyệt của giảng viên hoặc người có thẩm quyền.
 ## §3. Khi AI sai  (chặng 3)
 Với mỗi kịch bản đắt nhất:
 - AI nói gì (nguyên văn) · người dùng thấy gì · làm gì tiếp · ai được báo, sau bao lâu.
