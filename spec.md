@@ -5,7 +5,7 @@
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
 | Vũ Huy Hiệu | 2A202603979 | Dựng Prototype HTML tương tác (`prototype/index.html`), thiết kế cơ chế Progressive Hint & Modal duyệt chuyển TA, bộ tiêu chí Pass/Fail (§6), và phụ trách trình diễn Prototype trong buổi Demo (§7). |
-| Đỗ Việt Anh | 2A202603973 | |
+| Đỗ Việt Anh | 2A202603973 | Thêm phần tính năng AI không làm, hoàn thành 5 kịch bản rủi ro, làm rõ quyền mức của các tool, viết cost-of-error |
 | Lê Thị Ly | 2A202603989 | |
 
 ## §1. Lát cắt & phạm vi
