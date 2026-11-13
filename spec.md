@@ -63,12 +63,77 @@ Tuy nhiên, nhóm ưu tiên kịch bản 1 và 6 vì chúng trực tiếp thể 
 
 Kịch bản 7 vẫn được xem là rủi ro nghiêm trọng và sẽ được xử lý trong bảng phân quyền Autonomy: `dang_FAQ` không được tự động thực hiện khi chưa có phê duyệt của giảng viên hoặc người có thẩm quyền.
 ## §3. Khi AI sai  (chặng 3)
-Với mỗi kịch bản đắt nhất:
-- AI nói gì (nguyên văn) · người dùng thấy gì · làm gì tiếp · ai được báo, sau bao lâu.
-- Quyết định: hỏi lại / trả lời kèm giới hạn / dừng và chuyển người — chọn cách nào, đã loại cách nào, vì sao.
-- Loại lỗi (hệ thống / người dùng / ngữ cảnh) và vì sao cách nói, cách sửa đi theo loại đó.
-- 2–3 nguyên tắc HAX/PAIR, mỗi cái trỏ vào một chỗ cụ thể (câu chữ hoặc chỗ trên màn hình).
-- Lỗi nào sửa câu chữ không cứu được (nếu có), và thiết kế cứu nó thế nào.
+
+### 1. Kịch bản 1 — AI bảo vệ thông tin sai trong tài liệu (§3.3)
+
+#### a. Trải nghiệm cụ thể khi phát hiện mâu thuẫn
+- **AI nói gì (nguyên văn):**
+  > *"Phép tính của bạn hoàn toàn chính xác về mặt toán học: với phương sai $s^2 = 0.25$, độ lệch chuẩn là $\sqrt{0.25} = 0.5$, và $0.5 > 0.25$.*
+  > 
+  > *Tuy nhiên, câu cuối mục **§3.3 Tài liệu Buổi 3** hiện đang ghi: 'Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai'. Nhận định này chỉ đúng khi phương sai lớn hơn 1; với phương sai từ 0 đến 1, độ lệch chuẩn sẽ lớn hơn phương sai.*
+  > 
+  > *Vì là trợ lý AI, mình không có thẩm quyền tự ý chỉnh sửa giáo trình chính thức của khóa học. Mình đã tạo sẵn một phiếu ghi nhận điểm mâu thuẫn này để chuyển tới Đội ngũ Giảng viên và TA kiểm tra vào ca làm việc sáng mai (từ 08:00). Bạn có muốn gửi phiếu này kèm câu hỏi của bạn để được xác nhận chính thức không?"*
+
+- **Người dùng thấy gì trên màn hình (UI):**
+  - **Hộp cảnh báo mâu thuẫn (Context Alert Box - nền vàng cam nhạt):** Xuất hiện ngay trên câu trả lời với tiêu đề `[Cần xác minh với Giảng viên: Mục §3.3]`.
+  - **Khối đối chiếu nguồn sự thật song song (Side-by-side Evidence View):**
+    - *Cột trái (Giáo trình khóa học §3.3):* Trích dẫn nguyên văn câu: *"Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai"*.
+    - *Cột phải (Quy tắc toán học cơ bản):* Minh họa trực quan: $0 < x < 1 \implies \sqrt{x} > x$ (ví dụ: $\sqrt{0.25} = 0.5$).
+  - **Huy hiệu giới hạn vai trò (Authority Badge):** Nhãn `[AI không có thẩm quyền sửa giáo trình]`.
+  - **Cụm nút hành động (Action Buttons):**
+    - Nút chính: `[Gửi lưu ý này cho Giảng viên & TA]` (kèm dòng chú thích SLA: *Dự kiến phản hồi sau 08:00 sáng mai*).
+    - Nút phụ: `[Tiếp tục học bài]` (bỏ qua cảnh báo để hỏi tiếp nội dung khác).
+
+- **Người dùng làm gì tiếp:**
+  - Học viên có thể bấm `[Gửi lưu ý này cho Giảng viên & TA]` để lưu lại thắc mắc vào hệ thống hỗ trợ mà không sợ bị quên vào sáng hôm sau.
+  - Học viên hoàn toàn yên tâm làm tiếp các câu hỏi lý thuyết hoặc bài tập khác mà không bị lung lay kiến thức toán học cơ bản.
+  - Nếu học viên không bấm gì: Cuộc trò chuyện vẫn tiếp diễn bình thường, AI không tự tiện gửi vé rác hay ngắt quãng việc học lúc đêm muộn.
+
+- **Ai được báo, sau bao lâu, thấy gì:**
+  - **Ai được báo:** Trợ giảng (TA) trực ca sáng và Giảng viên phụ trách học phần Buổi 3.
+  - **Sau bao lâu:** Do học viên học lúc đêm muộn (sau 22:00, ngoài khung giờ hỗ trợ 08:00–22:00 của TA), hệ thống tự động lưu vào hàng đợi (Ticket Queue) của ca trực gần nhất vào **08:00 sáng hôm sau**, không làm phiền TA ban đêm và không hứa hẹn sai SLA với học viên.
+  - **Người đó thấy gì:** Màn hình Dashboard quản trị của TA/Giảng viên nhận một ticket ưu tiên cao mang nhãn `[DOC_CONFLICT_3.3]` kèm: ID học viên, mốc thời gian hỏi bài, đoạn chat đối chiếu giữa câu trích dẫn §3.3 và phản ví dụ số học $0.25 \to 0.5$.
+
+#### b. Lập luận quyết định (chọn cách nào, đã loại cách nào, vì sao)
+- **Các phương án đã cân nhắc:**
+  1. *Phương án A — Dừng hoàn toàn và chuyển người ngay (Hard Stop & Escalate):* Từ chối giải thích thêm, báo tài liệu có tranh cãi và khóa đoạn chat, yêu cầu học viên chờ sáng mai TA trả lời.
+  2. *Phương án B — Hỏi lại để làm rõ (Clarification Loop):* Hỏi vặn lại học viên lấy con số 0.25 ở đâu, có chắc đề bài yêu cầu như vậy không.
+  3. *Phương án C — Trả lời kèm giới hạn & mở đường chuyển người (Scoped Response with Escalation Path).*
+- **Chọn phương án:** **Phương án C (Trả lời kèm giới hạn & mở đường chuyển người)**.
+- **Vì sao chọn Phương án C:**
+  - Bản chất lát cắt là **trợ lý học bài lúc tối muộn khi không còn ai để hỏi**. Nếu dừng hẳn, học viên bị rơi vào ngõ cụt (dead-end) lúc 23:00, dễ nản chí và bỏ cuộc.
+  - Phép toán căn bậc hai là chân lý logic hiển nhiên ($\sqrt{0.25} = 0.5 > 0.25$). AI đủ khả năng thừa nhận tính đúng đắn của phép tính để củng cố tâm lý tự tin cho học viên, đồng thời khoanh vùng giới hạn thẩm quyền (AI không được tự ý phủ nhận giá trị pháp lý của giáo trình).
+- **Vì sao loại các phương án kia:**
+  - *Loại Phương án A:* Bắt học viên chờ người vào đêm muộn trong khi TA đã hết ca trực (22:00) là phá vỡ lời hứa giá trị cốt lõi của sản phẩm.
+  - *Loại Phương án B:* Câu hỏi của học viên đã có đầy đủ tiền đề và phản ví dụ số học rõ ràng. Hỏi vặn lại sẽ biến AI thành cỗ máy cù cưa, né tránh và gây ức chế tâm lý.
+
+#### c. Loại lỗi và vì sao cách nói, cách sửa đi theo loại đó
+- **Loại lỗi:** **Lỗi ngữ cảnh (Context Error / Environment & Knowledge Conflict)** kết hợp với mâu thuẫn dữ liệu nguồn (Source data conflict).
+- **Vì sao cách nói và cách sửa đi theo loại đó:**
+  - *Bản chất:* Hệ thống AI hoạt động đúng yêu cầu kỹ thuật (gọi `tra_cuu_tai_lieu` ra chính xác câu cuối mục §3.3). Học viên cũng tư duy hoàn toàn đúng về mặt toán học. Sự cố xảy ra do ngữ cảnh xung đột giữa: *Quy ước khóa học (tài liệu có lỗi biên tập)* và *Chân lý toán học phổ quát*.
+  - *Cách nói:* Không được nhận lỗi như một "lỗi hệ thống" ngớ ngẩn (*"Xin lỗi bạn, tôi là AI nên bị nhầm"* — vì giáo trình viết như thế thật). Đồng thời, không được coi là "lỗi người dùng" (*"Bạn cần đọc kỹ lại tài liệu"* — sẽ thành gaslighting học viên). Cách nói phải trung lập, khách quan: **Xác nhận tính đúng của phép toán + Minh bạch chỉ rõ vị trí câu văn gây hiểu lầm trong tài liệu + Thừa nhận giới hạn quyền hạn của AI**.
+  - *Cách sửa:* Phải sửa bằng **quy trình phân quyền và thiết kế giao diện (UI/UX)** chứ không thể chỉ sửa prompt bảo AI "hãy thông minh lên".
+
+#### d. Nguyên tắc HAX/PAIR áp dụng
+1. **HAX G11 (Make clear why the system did what it did) & PAIR Explainability (Tin đúng mức):**
+   - *Vị trí trỏ vào:* Khối đối chiếu trực quan song song giữa nguyên văn câu cuối mục §3.3 và phép tính phản ví dụ $0 < x < 1 \implies \sqrt{x} > x$. Thiết kế này giải thích rõ *vì sao* lại có sự mâu thuẫn (do giáo trình đã khái quát hóa vội vã chỉ dựa trên trường hợp phương sai lớn hơn 1).
+2. **HAX G10 (Scope services when in doubt) & PAIR Graceful Failure:**
+   - *Vị trí trỏ vào:* Câu nói thu hẹp phạm vi thẩm quyền: *"Vì là trợ lý AI, mình không có thẩm quyền tự ý chỉnh sửa giáo trình chính thức... Mình đã tạo sẵn một phiếu ghi nhận..."*. AI phân định ranh giới giữa việc hỗ trợ giảng giải toán học và việc công nhận quy chuẩn tài liệu của khóa học.
+3. **HAX G15 (Encourage granular feedback) & PAIR Feedback & Control:**
+   - *Vị trí trỏ vào:* Nút bấm `[Gửi lưu ý này cho Giảng viên & TA]` kèm dòng hiển thị SLA tiếp nhận sau 08:00 sáng. Cho phép học viên chủ động chuyển tiếp vấn đề đến người có thẩm quyền cao nhất mà không bị mất dấu vết học tập.
+
+#### e. Lỗi sửa câu chữ KHÔNG cứu được và Thiết kế giải cứu
+- **Lỗi sửa câu chữ không cứu được:**
+  - Dù prompt hay câu trả lời của AI có khéo léo đến đâu, thì **văn bản chính thức §3.3 trên web khóa học vẫn chứa câu sai**. Học viên khác không hỏi AI vẫn tiếp thu sai. Nếu bài thi cuối kỳ có câu trắc nghiệm dựa vào chữ nghĩa của §3.3, học viên làm theo toán học vẫn có nguy cơ bị trừ điểm oan. Ngoài ra, AI cũng không được tự tiện dùng tool `dang_FAQ` để đính chính cho cả lớp vì chưa có sự phê duyệt sư phạm từ Giảng viên.
+- **Thiết kế cứu nó (System & UI Design):**
+  1. **Hệ thống tạo phiếu kiểm duyệt (Automated Flagging Pipeline):** Khi phát hiện phản biện mâu thuẫn tài liệu, hệ thống tự động kích hoạt `chuyen_TA` với nhãn `[DOC_VERIFICATION]`, đưa thẳng vào hàng đợi phê duyệt của Giảng viên ca sáng, đi kèm đề xuất sửa câu chữ cho mục §3.3.
+  2. **Trạng thái tài liệu tạm thời (UI State):** Trên cổng học tập trực tuyến, cạnh mục §3.3 tự động hiện một nhãn tạm `[Đang chờ Giảng viên xác minh chỉnh lý]` để bảo vệ quyền lợi làm bài của học viên.
+  3. **Rào chắn tự chủ (Autonomy Guardrail):** Cấm hoàn toàn AI tự ý kích hoạt `dang_FAQ` khi chưa có chữ ký duyệt của Giảng viên.
+
+---
+
+### 2. Kịch bản 6 — AI tiết lộ đáp án Bài tập 3 đang mở
+*(Chờ bổ sung)*
 
 ## §4. Mức tự chủ  (chặng 4)
 Với mỗi tool:
