@@ -18,7 +18,7 @@
 - 3 việc tính năng KHÔNG làm, mỗi việc một câu vì sao.
     1. Không được cũng cấp đáp án và lời giải chi tiết từng bước, vì học viên sẽ có xu hướng chép thay vì hiểu cách làm
     2. Không đánh giá hay nhận xét năng lực của học viên, vì dễ gây định kiến và làm tổn thương tâm lý khi học viên nản lòng lúc tối muộn
-    3.Không tự suy đoán hoặc khẳng định nội dung không có căn cứ từ tài liệu khóa học: Vì thông tin sai về kiến thức, deadline hoặc nội dung chưa mở có thể khiến học viên hiểu sai và đưa ra quyết định học tập không chính xác.
+    3. Không tự suy đoán hoặc khẳng định nội dung không có căn cứ từ tài liệu khóa học: Vì thông tin sai về kiến thức, deadline hoặc nội dung chưa mở có thể khiến học viên hiểu sai và đưa ra quyết định học tập không chính xác.
 
 ## §2. Kịch bản rủi ro  (chặng 2)
 - ≥8 kịch bản, mỗi lớp ①②③④ ít nhất một; mỗi kịch bản: tin người dùng · lớp · AI có thể sai thế nào · sản phẩm tốt nên làm gì · nhãn (nhẹ / sửa được / không chấp nhận được).
